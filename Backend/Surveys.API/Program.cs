@@ -5,6 +5,13 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options => options.AddDefaultPolicy(
+    policy => policy.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+            ));
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -14,6 +21,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
+
 app.UseHttpsRedirection();
 
 string[] summaries =
@@ -21,7 +30,7 @@ string[] summaries =
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 ];
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/api/WeatherForecast", () =>
 {
     WeatherForecast[] forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast

@@ -1,0 +1,36 @@
+.navigation {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.514);
+    background-color: white;
+    height: 52px;
+
+    .navigation-items {
+        a {
+            color: black;
+            padding: 8px 16px;
+            font-weight: normal;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:active {
+                color: grey;
+                font-weight: bold;
+                border: none;
+            }
+             
+            &:last-child {
+                margin-left: auto;
+            }
+    
+        }
+
+        .active-item {
+            font-weight: bold;
+            border-bottom: 2px solid black;
+
+            &:active {
+                border-bottom: 2px solid grey;
+            }
+        } 
+    }   
+}
